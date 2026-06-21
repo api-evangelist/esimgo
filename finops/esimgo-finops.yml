@@ -1,0 +1,97 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: eSIM Go
+providerId: esimgo
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- eSIM
+- Connectivity
+- Travel Data
+- Telecom
+- Mobile
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of eSIM Go spend. eSIM Go bills against a prepaid organisation
+  balance that is drawn down as data bundles are ordered; bundle cost is a
+  function of data volume, validity duration, and geographic coverage, with
+  wholesale rates improving by commitment tier. Unused bundles in inventory can
+  be refunded back to balance. There are no per-API-call fees.
+notes: >-
+  Per-bundle wholesale rates are quoted per partner and are not publicly
+  reconciled. Verify rates against GET /catalogue and the partner agreement
+  during reconciliation.
+sources:
+- https://esimgo.com/product/pricing/
+- https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: eSIM Go
+serviceCategory: Telecommunications
+billingModel:
+  pricingCategory: Prepaid Balance
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Refund
+focusColumns:
+  ServiceName: eSIM Go API
+  ServiceCategory: Telecommunications
+  ProviderName: eSIM Go
+  PublisherName: eSIM Go
+  InvoiceIssuerName: eSIM Go
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Prepaid Balance
+meters:
+- name: balance_topup
+  description: Prepaid organisation balance added via top-up, drawn down by bundle orders.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - organisation
+- name: bundle_orders
+  description: Data bundles ordered from the catalogue, priced by data volume, duration, and coverage.
+  unit: bundles
+  aggregation: sum
+  dimensions:
+  - organisation
+  - bundle
+  - region
+- name: bundle_refunds
+  description: Unused bundles refunded from inventory back to the organisation balance.
+  unit: bundles
+  aggregation: sum
+  dimensions:
+  - organisation
+  - bundle
+- name: esim_assignments
+  description: Bundle-to-eSIM assignments performed via orders or the apply endpoint.
+  unit: assignments
+  aggregation: sum
+  dimensions:
+  - organisation
+  - bundle
+principles:
+- name: Visibility
+  description: Pull GET /organisation balance and GET /orders history; track bundle spend by region and customer.
+- name: Allocation
+  description: Tag eSIMs and orders with customerRef / profileID to map bundle spend to end customers or teams.
+- name: Optimization
+  description: Right-size bundles to traveler need; refund unused inventory; pursue higher commitment tiers for discounted wholesale rates.
+- name: Accountability
+  description: Monitor prepaid balance against the tier minimum top-up; review bundle burn against forecast.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

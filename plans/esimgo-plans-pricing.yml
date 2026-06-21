@@ -1,0 +1,127 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: eSIM Go
+providerId: esimgo
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- eSIM
+- Connectivity
+- Travel Data
+- Telecom
+- Mobile
+- Plans
+description: >-
+  eSIM Go is a wholesale/reseller platform that operates on a prepaid balance
+  model rather than per-call API fees. Partners top up an organisation balance
+  and consume it as they order data bundles via the API; bundle prices depend on
+  data volume, validity duration, and geographic coverage, and improve as
+  partners move up commitment tiers. There are no API setup fees. The specific
+  per-bundle wholesale rates are quoted to onboarded partners and are not
+  publicly reconciled here.
+notes: >-
+  Tier minimum top-up figures below are drawn from the public eSIM Go pricing
+  page and may change. Per-bundle wholesale catalogue rates are visible to
+  authenticated partners via GET /catalogue and are not reconciled in this
+  artifact.
+sources:
+- https://esimgo.com/product/pricing/
+- https://docs.esim-go.com/guides/getting_started/
+- https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+plans:
+- id: esimgo-standard
+  name: Standard
+  type: usage
+  description: >-
+    Entry reseller tier on a prepaid balance, billed by bundle consumption with
+    no setup fee. Minimum monthly top-up applies (measured quarterly after the
+    first three months).
+  entries:
+  - label: Minimum Monthly Top-up
+    name: standard_topup
+    type: prepaid
+    metric: balance
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $1k USD minimum top-up
+    userMultiplied: false
+  - label: Data Bundle
+    name: standard_bundle
+    type: usage
+    metric: bundles
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: 1
+    price: per-bundle wholesale rate (see GET /catalogue)
+    userMultiplied: false
+  elements:
+  - name: Catalogue
+  - name: Orders
+  - name: eSIMs
+  - name: Inventory
+  - name: Network
+  - name: Webhooks
+- id: esimgo-silver
+  name: Silver
+  type: usage
+  description: >-
+    Higher-volume tier with rates discounted from Standard.
+  entries:
+  - label: Minimum Monthly Top-up
+    name: silver_topup
+    type: prepaid
+    metric: balance
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $25k USD minimum top-up
+    userMultiplied: false
+  elements:
+  - name: Discounted Wholesale Rates
+- id: esimgo-gold
+  name: Gold
+  type: usage
+  description: >-
+    Volume tier with rates discounted from Silver.
+  entries:
+  - label: Minimum Monthly Top-up
+    name: gold_topup
+    type: prepaid
+    metric: balance
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $50k USD first 3 months, then $100k USD minimum top-up
+    userMultiplied: false
+  elements:
+  - name: Discounted Wholesale Rates
+  - name: Custom Bundles (subject to forecasts)
+- id: esimgo-platinum
+  name: Platinum
+  type: usage
+  description: >-
+    Top tier with market-leading wholesale rates.
+  entries:
+  - label: Minimum Monthly Top-up
+    name: platinum_topup
+    type: prepaid
+    metric: balance
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $100k USD first 3 months, then $250k USD minimum top-up
+    userMultiplied: false
+  elements:
+  - name: Market-Leading Wholesale Rates
+  - name: Custom Bundles
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

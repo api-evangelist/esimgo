@@ -1,0 +1,497 @@
+{
+  "item": [
+    {
+      "id": "a1f0c1d2-1111-4a01-9001-catalogue0001",
+      "name": "Catalogue",
+      "description": {
+        "content": "Browse data bundles available to your organisation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2f0c1d2-1111-4a01-9001-catalogue0002",
+          "name": "Get Bundle catalogue",
+          "request": {
+            "name": "Get Bundle catalogue",
+            "description": {
+              "content": "Lists all data bundles available to your organisation for ordering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["catalogue"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "countries", "value": "GB", "disabled": true },
+                { "key": "region", "value": "Europe", "disabled": true }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "c3f0c1d2-1111-4a01-9001-catalogue0003",
+          "name": "Get Bundle details from catalogue",
+          "request": {
+            "name": "Get Bundle details from catalogue",
+            "description": {
+              "content": "Retrieves the full detail of a single bundle by name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["catalogue", ":bundleName"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "bundleName", "value": "esim_1GB_7D_GB_V2" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d4f0c1d2-2222-4a01-9001-orders00000001",
+      "name": "Orders",
+      "description": {
+        "content": "Validate, place, and retrieve bundle orders.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5f0c1d2-2222-4a01-9001-orders00000002",
+          "name": "List orders",
+          "request": {
+            "name": "List orders",
+            "description": {
+              "content": "Lists orders placed by your organisation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["orders"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "f6f0c1d2-2222-4a01-9001-orders00000003",
+          "name": "Create orders",
+          "request": {
+            "name": "Create orders",
+            "description": {
+              "content": "Validates or processes a bundle order, optionally assigning bundles to eSIMs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["orders"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"transaction\",\n  \"assign\": true,\n  \"order\": [\n    {\n      \"type\": \"bundle\",\n      \"quantity\": 1,\n      \"item\": \"esim_1GB_7D_GB_V2\"\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "07f0c1d2-2222-4a01-9001-orders00000004",
+          "name": "Get order detail",
+          "request": {
+            "name": "Get order detail",
+            "description": {
+              "content": "Retrieves the detail of a single order by its reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["orders", ":orderReference"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "orderReference", "value": "{{orderReference}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "18f0c1d2-3333-4a01-9001-esims000000001",
+      "name": "eSIMs",
+      "description": {
+        "content": "Manage eSIMs, bundle assignments, and install details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "29f0c1d2-3333-4a01-9001-esims000000002",
+          "name": "List eSIMs",
+          "request": {
+            "name": "List eSIMs",
+            "description": {
+              "content": "Retrieves all eSIMs currently assigned to your organisation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["esims"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "3af0c1d2-3333-4a01-9001-esims000000003",
+          "name": "Update eSIM Details",
+          "request": {
+            "name": "Update eSIM Details",
+            "description": {
+              "content": "Updates editable details on an eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["esims"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"iccid\": \"{{iccid}}\",\n  \"customerRef\": \"customer-123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "4bf0c1d2-3333-4a01-9001-esims000000004",
+          "name": "Get eSIM details",
+          "request": {
+            "name": "Get eSIM details",
+            "description": {
+              "content": "Retrieves the details and status of a single eSIM by ICCID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["esims", ":iccid"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "iccid", "value": "{{iccid}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "5cf0c1d2-3333-4a01-9001-esims000000005",
+          "name": "Apply Bundle to an eSIM",
+          "request": {
+            "name": "Apply Bundle to an eSIM",
+            "description": {
+              "content": "Applies an existing bundle from inventory to an eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["esims", "apply"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"esim_1GB_7D_GB_V2\",\n  \"iccid\": \"{{iccid}}\",\n  \"allowReassign\": false\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "id": "6df0c1d2-3333-4a01-9001-esims000000006",
+          "name": "Get eSIM Install Details",
+          "request": {
+            "name": "Get eSIM Install Details",
+            "description": {
+              "content": "Returns matchingId, SM-DP+ address, and Apple install URL used to build the LPA QR code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["esims", "assignments"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "reference", "value": "{{orderReference}}", "disabled": true },
+                { "key": "iccid", "value": "{{iccid}}", "disabled": true }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "7ef0c1d2-3333-4a01-9001-esims000000007",
+          "name": "List Bundles applied to eSIM",
+          "request": {
+            "name": "List Bundles applied to eSIM",
+            "description": {
+              "content": "Lists all bundles that have been applied to the eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["esims", ":iccid", "bundles"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "iccid", "value": "{{iccid}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8ff0c1d2-4444-4a01-9001-inventory00001",
+      "name": "Inventory",
+      "description": {
+        "content": "View and refund unassigned bundle inventory.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "90f0c1d2-4444-4a01-9001-inventory00002",
+          "name": "Get bundle inventory",
+          "request": {
+            "name": "Get bundle inventory",
+            "description": {
+              "content": "Returns the unassigned bundle inventory held by your organisation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["inventory"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "a1f0c1d2-4444-4a01-9001-inventory00003",
+          "name": "Refund bundle from inventory",
+          "request": {
+            "name": "Refund bundle from inventory",
+            "description": {
+              "content": "Refunds an unused bundle held in inventory back to the organisation balance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["inventory", "refund"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"esim_1GB_7D_GB_V2\",\n  \"quantity\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b2f0c1d2-5555-4a01-9001-networks000001",
+      "name": "Networks",
+      "description": {
+        "content": "Per-country network coverage data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3f0c1d2-5555-4a01-9001-networks000002",
+          "name": "Get Country Network Data",
+          "request": {
+            "name": "Get Country Network Data",
+            "description": {
+              "content": "Returns per-country network coverage data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["networks"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "countries", "value": "GB", "disabled": true }
+              ],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "d4f0c1d2-6666-4a01-9001-organisation01",
+      "name": "Organisation",
+      "description": {
+        "content": "Organisation account details and balance.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5f0c1d2-6666-4a01-9001-organisation02",
+          "name": "Get Current Organisation Details",
+          "request": {
+            "name": "Get Current Organisation Details",
+            "description": {
+              "content": "Returns organisation account details, including balance and currency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["organisation"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "id": "f6f0c1d2-6666-4a01-9001-organisation03",
+          "name": "Get Bundle Groups",
+          "request": {
+            "name": "Get Bundle Groups",
+            "description": {
+              "content": "Returns the bundle groups available to the organisation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": ["organisation", "groups"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.esim-go.com/v2.4",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "",
+      "key": "iccid"
+    },
+    {
+      "type": "string",
+      "value": "",
+      "key": "orderReference"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "X-API-Key" },
+      { "key": "value", "value": "{{apiKey}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "info": {
+    "_postman_id": "e51m90e5-1m90-4e51-m90e-51m90esimg01",
+    "name": "eSIM Go API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the eSIM Go connectivity and travel-data platform. Browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR details, manage inventory, and look up network coverage. Auth via the X-API-Key header.\n\nDocs: https://docs.esim-go.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,282 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "eSIM Go API",
+    "version": "2.4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "X-API-Key",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogue",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bundle catalogue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/catalogue"
+          },
+          "docs": "Lists all data bundles available to your organisation for ordering."
+        },
+        {
+          "info": {
+            "name": "Get Bundle details from catalogue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/catalogue/{bundleName}"
+          },
+          "docs": "Retrieves the full detail of a single bundle by name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/orders"
+          },
+          "docs": "Lists orders placed by your organisation."
+        },
+        {
+          "info": {
+            "name": "Create orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.esim-go.com/v2.4/orders",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"type\": \"transaction\",\n  \"assign\": true,\n  \"order\": [\n    {\n      \"type\": \"bundle\",\n      \"quantity\": 1,\n      \"item\": \"esim_1GB_7D_GB_V2\"\n    }\n  ]\n}"
+            }
+          },
+          "docs": "Validates or processes a bundle order, optionally assigning bundles to eSIMs."
+        },
+        {
+          "info": {
+            "name": "Get order detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/orders/{orderReference}"
+          },
+          "docs": "Retrieves the detail of a single order by its reference."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "eSIMs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List eSIMs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims"
+          },
+          "docs": "Retrieves all eSIMs currently assigned to your organisation."
+        },
+        {
+          "info": {
+            "name": "Update eSIM Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.esim-go.com/v2.4/esims",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"iccid\": \"{{iccid}}\",\n  \"customerRef\": \"customer-123\"\n}"
+            }
+          },
+          "docs": "Updates editable details on an eSIM."
+        },
+        {
+          "info": {
+            "name": "Get eSIM details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/{iccid}"
+          },
+          "docs": "Retrieves the details and status of a single eSIM by ICCID."
+        },
+        {
+          "info": {
+            "name": "Apply Bundle to an eSIM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.esim-go.com/v2.4/esims/apply",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"esim_1GB_7D_GB_V2\",\n  \"iccid\": \"{{iccid}}\",\n  \"allowReassign\": false\n}"
+            }
+          },
+          "docs": "Applies an existing bundle from inventory to an eSIM."
+        },
+        {
+          "info": {
+            "name": "Get eSIM Install Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/assignments"
+          },
+          "docs": "Returns matchingId, SM-DP+ address, and Apple install URL used to build the LPA QR code."
+        },
+        {
+          "info": {
+            "name": "Get eSIM history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/{iccid}/history"
+          },
+          "docs": "Returns the lifecycle and status-change history of an eSIM."
+        },
+        {
+          "info": {
+            "name": "Get eSIM Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/{iccid}/location"
+          },
+          "docs": "Returns the last known network/country location of an eSIM."
+        },
+        {
+          "info": {
+            "name": "List Bundles applied to eSIM",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/{iccid}/bundles"
+          },
+          "docs": "Lists all bundles that have been applied to the eSIM."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get bundle inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/inventory"
+          },
+          "docs": "Returns the unassigned bundle inventory held by your organisation."
+        },
+        {
+          "info": {
+            "name": "Refund bundle from inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.esim-go.com/v2.4/inventory/refund",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"esim_1GB_7D_GB_V2\",\n  \"quantity\": 1\n}"
+            }
+          },
+          "docs": "Refunds an unused bundle held in inventory back to the organisation balance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Networks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Country Network Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/networks"
+          },
+          "docs": "Returns per-country network coverage data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organisation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current Organisation Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/organisation"
+          },
+          "docs": "Returns organisation account details, including balance and currency."
+        },
+        {
+          "info": {
+            "name": "Get Bundle Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/organisation/groups"
+          },
+          "docs": "Returns the bundle groups available to the organisation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,870 @@
+openapi: 3.0.1
+info:
+  title: eSIM Go API
+  description: >-
+    REST API for the eSIM Go connectivity and travel-data platform. Resellers and
+    brands use it to browse the data-bundle catalogue, place and track orders, assign
+    bundles to eSIMs, retrieve install/QR provisioning details, manage inventory,
+    look up network coverage, and receive usage callbacks. Authentication is via the
+    X-API-Key header.
+  termsOfService: https://www.esim-go.com
+  contact:
+    name: eSIM Go Support
+    url: https://docs.esim-go.com
+  version: '2.4'
+servers:
+  - url: https://api.esim-go.com/v2.4
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Catalogue
+    description: Browse data bundles available to your organisation.
+  - name: Orders
+    description: Validate, place, and retrieve bundle orders.
+  - name: eSIMs
+    description: Manage eSIMs, bundle assignments, and install details.
+  - name: Inventory
+    description: View and refund unassigned bundle inventory.
+  - name: Networks
+    description: Per-country network coverage data.
+  - name: Organisation
+    description: Organisation account details and balance.
+paths:
+  /catalogue:
+    get:
+      operationId: getCatalogue
+      tags:
+        - Catalogue
+      summary: Get Bundle catalogue
+      description: >-
+        Lists all data bundles available to your organisation for ordering. Bundle
+        names returned here can be used with the /orders endpoint to place an order.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number to return.
+        - name: perPage
+          in: query
+          schema:
+            type: integer
+          description: Number of bundles per page.
+        - name: direction
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: Sort direction.
+        - name: orderBy
+          in: query
+          schema:
+            type: string
+          description: Column to sort by.
+        - name: description
+          in: query
+          schema:
+            type: string
+          description: Wildcard search filter on bundle description.
+        - name: group
+          in: query
+          schema:
+            type: string
+          description: Filter by Bundle Group.
+        - name: countries
+          in: query
+          schema:
+            type: string
+          description: Comma-separated ISO country codes.
+        - name: region
+          in: query
+          schema:
+            type: string
+          description: Filter by region.
+      responses:
+        '200':
+          description: A page of bundles available to the organisation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogueResponse'
+  /catalogue/{bundleName}:
+    get:
+      operationId: getCatalogueBundle
+      tags:
+        - Catalogue
+      summary: Get Bundle details from catalogue
+      description: Retrieves the full detail of a single bundle by its name.
+      parameters:
+        - name: bundleName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The unique bundle name/identifier.
+      responses:
+        '200':
+          description: Bundle detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+  /orders:
+    get:
+      operationId: listOrders
+      tags:
+        - Orders
+      summary: List orders
+      description: Lists orders placed by your organisation.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: perPage
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+    post:
+      operationId: createOrder
+      tags:
+        - Orders
+      summary: Create orders
+      description: >-
+        Validates or processes an order. Set type to "validate" to price-check an
+        order without charging, or "transaction" to place it. When assign is true
+        and ICCIDs are supplied, ordered bundles are assigned to those eSIMs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: Order validation or transaction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+  /orders/{orderReference}:
+    get:
+      operationId: getOrder
+      tags:
+        - Orders
+      summary: Get order detail
+      description: Retrieves the detail of a single order by its reference.
+      parameters:
+        - name: orderReference
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+  /esims:
+    get:
+      operationId: listEsims
+      tags:
+        - eSIMs
+      summary: List eSIMs
+      description: >-
+        Retrieves all eSIMs currently assigned to your organisation, with options
+        for filtering and pagination.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: perPage
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A list of eSIMs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsimList'
+    put:
+      operationId: updateEsim
+      tags:
+        - eSIMs
+      summary: Update eSIM Details
+      description: Updates editable details (such as a customer reference) on an eSIM.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEsimRequest'
+      responses:
+        '200':
+          description: The updated eSIM.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Esim'
+  /esims/{iccid}:
+    get:
+      operationId: getEsim
+      tags:
+        - eSIMs
+      summary: Get eSIM details
+      description: Retrieves the details and status of a single eSIM by ICCID.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: eSIM detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Esim'
+  /esims/apply:
+    post:
+      operationId: applyBundleToEsim
+      tags:
+        - eSIMs
+      summary: Apply Bundle to an eSIM
+      description: >-
+        Applies an existing bundle from inventory to an eSIM. Optionally allows
+        reassignment to a new compatible eSIM if the supplied one is incompatible.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyBundleRequest'
+      responses:
+        '200':
+          description: The result of applying the bundle, including install details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignmentResult'
+  /esims/assignments:
+    get:
+      operationId: getEsimInstallDetails
+      tags:
+        - eSIMs
+      summary: Get eSIM Install Details
+      description: >-
+        Returns install/activation details for eSIMs from one or more orders or
+        bundle assignments, including matchingId, SM-DP+ address, and Apple install
+        URL used to build the LPA QR code (LPA:1$smdpAddress$matchingId).
+      parameters:
+        - name: reference
+          in: query
+          schema:
+            type: string
+          description: Order reference to retrieve assignments for.
+        - name: iccid
+          in: query
+          schema:
+            type: string
+          description: Filter assignments by a specific eSIM ICCID.
+      responses:
+        '200':
+          description: Install details for the matching eSIM assignments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallDetailsResponse'
+  /esims/{iccid}/history:
+    get:
+      operationId: getEsimHistory
+      tags:
+        - eSIMs
+      summary: Get eSIM history
+      description: Returns the lifecycle and status-change history of an eSIM.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: eSIM history records.
+          content:
+            application/json:
+              schema:
+                type: object
+  /esims/{iccid}/location:
+    get:
+      operationId: getEsimLocation
+      tags:
+        - eSIMs
+      summary: Get eSIM Location
+      description: Returns the last known network/country location of an eSIM.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: eSIM location.
+          content:
+            application/json:
+              schema:
+                type: object
+  /esims/{iccid}/sms:
+    post:
+      operationId: sendEsimSms
+      tags:
+        - eSIMs
+      summary: Send SMS to eSIM
+      description: Sends an SMS message to the eSIM.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                from:
+                  type: string
+      responses:
+        '200':
+          description: SMS accepted.
+  /esims/{iccid}/bundles:
+    get:
+      operationId: listEsimBundles
+      tags:
+        - eSIMs
+      summary: List Bundles applied to eSIM
+      description: Lists all bundles that have been applied to the eSIM.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Applied bundles.
+          content:
+            application/json:
+              schema:
+                type: object
+  /esims/{iccid}/bundles/{name}:
+    get:
+      operationId: getEsimBundleStatus
+      tags:
+        - eSIMs
+      summary: Get applied Bundle status
+      description: Retrieves the status and remaining allowance of an applied bundle.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Applied bundle status.
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: revokeEsimBundle
+      tags:
+        - eSIMs
+      summary: Revoke applied Bundle
+      description: Revokes an applied bundle from the eSIM.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Bundle revoked.
+  /esims/{iccid}/compatible-bundle:
+    get:
+      operationId: checkBundleCompatibility
+      tags:
+        - eSIMs
+      summary: Check eSIM and Bundle Compatibility
+      description: Checks whether a bundle is compatible with the given eSIM.
+      parameters:
+        - name: iccid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: name
+          in: query
+          schema:
+            type: string
+          description: Bundle name to test for compatibility.
+      responses:
+        '200':
+          description: Compatibility result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  compatible:
+                    type: boolean
+  /inventory:
+    get:
+      operationId: getInventory
+      tags:
+        - Inventory
+      summary: Get bundle inventory
+      description: >-
+        Returns the unassigned bundle inventory held by your organisation, grouped
+        by bundle name with available quantities.
+      responses:
+        '200':
+          description: Bundle inventory.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+  /inventory/refund:
+    post:
+      operationId: refundInventoryBundle
+      tags:
+        - Inventory
+      summary: Refund bundle from inventory
+      description: Refunds an unused bundle held in inventory back to the organisation balance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Bundle name to refund.
+                quantity:
+                  type: integer
+      responses:
+        '200':
+          description: Refund result.
+          content:
+            application/json:
+              schema:
+                type: object
+  /networks:
+    get:
+      operationId: getNetworks
+      tags:
+        - Networks
+      summary: Get Country Network Data
+      description: >-
+        Returns per-country network coverage data, listing the mobile networks and
+        supported speeds available for eSIM connectivity.
+      parameters:
+        - name: countries
+          in: query
+          schema:
+            type: string
+          description: Comma-separated ISO country codes to filter coverage.
+      responses:
+        '200':
+          description: Country network data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworksResponse'
+  /organisation:
+    get:
+      operationId: getOrganisation
+      tags:
+        - Organisation
+      summary: Get Current Organisation Details
+      description: Returns the current organisation account details, including balance and currency.
+      responses:
+        '200':
+          description: Organisation detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisation'
+  /organisation/groups:
+    get:
+      operationId: getBundleGroups
+      tags:
+        - Organisation
+      summary: Get Bundle Groups
+      description: Returns the bundle groups available to the organisation.
+      responses:
+        '200':
+          description: Bundle groups.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: >-
+        Organisation API key. Find it under Account Settings -> API Details in your
+        eSIM Go account and send it in the X-API-Key request header.
+  schemas:
+    CatalogueResponse:
+      type: object
+      properties:
+        bundles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bundle'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    Bundle:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique bundle identifier.
+        description:
+          type: string
+        groups:
+          type: array
+          items:
+            type: string
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        dataAmount:
+          type: integer
+          description: Data allowance in MB.
+        duration:
+          type: integer
+          description: Validity period of the bundle in days.
+        speed:
+          type: array
+          items:
+            type: string
+        autostart:
+          type: boolean
+        unlimited:
+          type: boolean
+        roamingEnabled:
+          type: array
+          items:
+            type: string
+        price:
+          type: number
+          description: Cost in the organisation's currency.
+        billingType:
+          type: string
+          example: FixedCost
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+        iso:
+          type: string
+    CreateOrderRequest:
+      type: object
+      required:
+        - type
+        - order
+      properties:
+        type:
+          type: string
+          enum: [validate, transaction]
+          description: '"validate" to price-check, "transaction" to place the order.'
+        assign:
+          type: boolean
+          description: Whether to assign ordered bundles to the supplied eSIMs.
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+    OrderItem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: bundle
+        quantity:
+          type: integer
+        item:
+          type: string
+          description: Bundle name/identifier.
+        iccids:
+          type: array
+          items:
+            type: string
+        allowReassign:
+          type: boolean
+        profileID:
+          type: string
+    OrderResponse:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+        total:
+          type: number
+        currency:
+          type: string
+        valid:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        assigned:
+          type: boolean
+        status:
+          type: string
+        statusMessage:
+          type: string
+        orderReference:
+          type: string
+        runningBalance:
+          type: number
+    OrderLine:
+      type: object
+      properties:
+        type:
+          type: string
+        item:
+          type: string
+        quantity:
+          type: integer
+        subTotal:
+          type: number
+        pricePerUnit:
+          type: number
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+    OrderList:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    ApplyBundleRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Bundle name to apply.
+        iccid:
+          type: string
+        allowReassign:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+    AssignmentResult:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+        assigned:
+          type: boolean
+    InstallDetailsResponse:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+    InstallDetails:
+      type: object
+      properties:
+        iccid:
+          type: string
+        matchingId:
+          type: string
+          description: Activation code used with the SM-DP+ address to build the LPA QR.
+        smdpAddress:
+          type: string
+          description: SM-DP+ server address used for eSIM activation.
+        rspUrl:
+          type: string
+          description: Full LPA activation string (LPA:1$smdpAddress$matchingId).
+        appleInstallUrl:
+          type: string
+          description: Universal link install URL for iOS 17.4+ devices.
+        profileStatus:
+          type: string
+        pin:
+          type: string
+        puk:
+          type: string
+        firstInstalledDateTime:
+          type: string
+          format: date-time
+    Esim:
+      type: object
+      properties:
+        iccid:
+          type: string
+        matchingId:
+          type: string
+        smdpAddress:
+          type: string
+        profileStatus:
+          type: string
+        appleInstallUrl:
+          type: string
+        firstInstalledDateTime:
+          type: string
+          format: date-time
+        customerRef:
+          type: string
+        assignedDate:
+          type: string
+          format: date-time
+    EsimList:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Esim'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    UpdateEsimRequest:
+      type: object
+      properties:
+        iccid:
+          type: string
+        customerRef:
+          type: string
+    InventoryResponse:
+      type: object
+      properties:
+        bundles:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              desc:
+                type: string
+              available:
+                type: integer
+                description: Quantity of this bundle available in inventory.
+    NetworksResponse:
+      type: object
+      properties:
+        countryNetworks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              iso:
+                type: string
+              networks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    brandName:
+                      type: string
+                    mcc:
+                      type: string
+                    mnc:
+                      type: string
+                    speed:
+                      type: array
+                      items:
+                        type: string
+    Organisation:
+      type: object
+      properties:
+        name:
+          type: string
+        balance:
+          type: number
+        currency:
+          type: string
+        organisationGroups:
+          type: array
+          items:
+            type: string
+    UsageCallback:
+      type: object
+      description: Payload POSTed to the partner-configured eSIM usage callback URL.
+      properties:
+        iccid:
+          type: string
+        bundle:
+          type: string
+        alertType:
+          type: string
+          description: Usage threshold or state change that triggered the callback.
+        remaining:
+          type: integer
+          description: Remaining data allowance in bytes.
+        timestamp:
+          type: string
+          format: date-time

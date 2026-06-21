@@ -1,0 +1,52 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: eSIM Go
+providerId: esimgo
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- eSIM
+- Connectivity
+- Travel Data
+- Telecom
+- Mobile
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The eSIM Go API is authenticated per-organisation with an X-API-Key and is
+  subject to fair-use request throttling. eSIM Go does not publish specific
+  numeric rate-limit values (requests per second/minute) in its public
+  documentation; ordering volume is effectively governed by the organisation's
+  prepaid balance and commitment tier. Specific throttle thresholds are not
+  reconciled in this artifact.
+notes: >-
+  Confirm any documented per-endpoint throttles and the throttled response code
+  with eSIM Go support or partner onboarding during reconciliation. Clients
+  should implement retries with exponential backoff.
+sources:
+- https://docs.esim-go.com/api/v2_4/
+- https://docs.esim-go.com/guides/getting_started/
+responseCodes:
+  throttled: 429
+limits:
+- name: API Requests
+  scope: organisation
+  metric: requests
+  limit: see provider documentation
+  notes: Per-organisation fair-use throttling on the X-API-Key; specific numeric limits are not publicly documented.
+- name: Order Volume
+  scope: organisation
+  metric: balance
+  limit: bounded by prepaid balance
+  notes: Bundle ordering is constrained by the organisation's prepaid balance and commitment tier rather than a fixed call quota.
+policies:
+- name: Tiered Commitment
+  description: Order capacity scales with the organisation's prepaid top-up tier (Standard, Silver, Gold, Platinum).
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,81 @@
+aid: esimgo
+name: eSIM Go
+review:
+  question: Does eSIM Go expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    eSIM Go's only asynchronous surface is an outbound HTTP callback (the eSIM
+    usage callback POSTed to a partner-configured URL). No AsyncAPI document was
+    authored at this time because the callback is a single outbound webhook
+    rather than a streaming channel; it is modeled instead as the UsageCallback
+    schema inside the OpenAPI definition and described in the Webhooks API entry.
+findings:
+  summary: |
+    eSIM Go does not publish a documented public WebSocket API. The eSIM Go
+    platform exposes a REST (HTTPS) API under https://api.esim-go.com/v2.4
+    authenticated with the X-API-Key header. Asynchronous notifications are
+    delivered as server-to-server HTTP webhooks (the eSIM usage callback that
+    eSIM Go POSTs to a partner-supplied callback URL), not over WebSocket. No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://) endpoint
+    is documented for catalogue, orders, eSIMs, inventory, or network data.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.esim-go.com/v2.4
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP callback POSTed by eSIM Go to a partner-configured URL for eSIM usage/state events. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the eSIM Go v2.4 API reference as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.esim-go.com/v2.4/catalogue
+    - GET    https://api.esim-go.com/v2.4/catalogue/{bundleName}
+    - GET    https://api.esim-go.com/v2.4/orders
+    - POST   https://api.esim-go.com/v2.4/orders
+    - GET    https://api.esim-go.com/v2.4/orders/{orderReference}
+    - GET    https://api.esim-go.com/v2.4/esims
+    - PUT    https://api.esim-go.com/v2.4/esims
+    - GET    https://api.esim-go.com/v2.4/esims/{iccid}
+    - POST   https://api.esim-go.com/v2.4/esims/apply
+    - GET    https://api.esim-go.com/v2.4/esims/assignments
+    - GET    https://api.esim-go.com/v2.4/esims/{iccid}/history
+    - GET    https://api.esim-go.com/v2.4/esims/{iccid}/location
+    - POST   https://api.esim-go.com/v2.4/esims/{iccid}/sms
+    - GET    https://api.esim-go.com/v2.4/esims/{iccid}/bundles
+    - GET    https://api.esim-go.com/v2.4/esims/{iccid}/bundles/{name}
+    - DELETE https://api.esim-go.com/v2.4/esims/{iccid}/bundles/{name}
+    - GET    https://api.esim-go.com/v2.4/esims/{iccid}/compatible-bundle
+    - GET    https://api.esim-go.com/v2.4/inventory
+    - POST   https://api.esim-go.com/v2.4/inventory/refund
+    - GET    https://api.esim-go.com/v2.4/networks
+    - GET    https://api.esim-go.com/v2.4/organisation
+    - GET    https://api.esim-go.com/v2.4/organisation/groups
+sources:
+  - url: https://docs.esim-go.com/api/v2_4/
+    type: APIReference
+    note: v2.4 reference lists REST base URL https://api.esim-go.com/v2.4 and X-API-Key auth; no WebSocket mentioned.
+  - url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+    type: Documentation
+    note: GET /catalogue endpoint for browsing data bundles.
+  - url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+    type: Documentation
+    note: POST /orders endpoint for validating and placing bundle orders.
+  - url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
+    type: Documentation
+    note: GET /esims/assignments returns matchingId, smdpAddress, appleInstallUrl for QR install; delivered over REST.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. The only asynchronous mechanism is an
+    outbound HTTP usage callback, which is captured as the Webhooks API entry in
+    apis.yml and the UsageCallback schema in the OpenAPI definition. No AsyncAPI
+    document was created because the single outbound webhook does not warrant a
+    channel-based streaming spec.
