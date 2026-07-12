@@ -124,6 +124,10 @@ apis:
     a partner-configured callback URL, enabling real-time tracking of data consumption
     and bundle state changes.
 common:
+- type: DomainSecurity
+  url: security/esimgo-domain-security.yml
+- type: Authentication
+  url: authentication/esimgo-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/esim-go
 - type: Website

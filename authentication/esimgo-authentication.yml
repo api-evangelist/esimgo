@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/esimgo-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  description: Organisation API key. Find it under Account Settings -> API Details in your eSIM
+    Go account and send it in the X-API-Key request header.
+  sources:
+  - openapi/esimgo-openapi.yml
