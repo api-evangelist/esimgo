@@ -1,0 +1,205 @@
+openapi: 3.0.1
+info:
+  title: eSIM Go Catalogue Orders API
+  description: REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.
+  termsOfService: https://www.esim-go.com
+  contact:
+    name: eSIM Go Support
+    url: https://docs.esim-go.com
+  version: '2.4'
+servers:
+- url: https://api.esim-go.com/v2.4
+security:
+- ApiKeyAuth: []
+tags:
+- name: Orders
+  description: Validate, place, and retrieve bundle orders.
+paths:
+  /orders:
+    get:
+      operationId: listOrders
+      tags:
+      - Orders
+      summary: List orders
+      description: Lists orders placed by your organisation.
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderList'
+    post:
+      operationId: createOrder
+      tags:
+      - Orders
+      summary: Create orders
+      description: Validates or processes an order. Set type to "validate" to price-check an order without charging, or "transaction" to place it. When assign is true and ICCIDs are supplied, ordered bundles are assigned to those eSIMs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: Order validation or transaction result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+  /orders/{orderReference}:
+    get:
+      operationId: getOrder
+      tags:
+      - Orders
+      summary: Get order detail
+      description: Retrieves the detail of a single order by its reference.
+      parameters:
+      - name: orderReference
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Order detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+components:
+  schemas:
+    OrderItem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: bundle
+        quantity:
+          type: integer
+        item:
+          type: string
+          description: Bundle name/identifier.
+        iccids:
+          type: array
+          items:
+            type: string
+        allowReassign:
+          type: boolean
+        profileID:
+          type: string
+    OrderList:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    OrderResponse:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+        total:
+          type: number
+        currency:
+          type: string
+        valid:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        assigned:
+          type: boolean
+        status:
+          type: string
+        statusMessage:
+          type: string
+        orderReference:
+          type: string
+        runningBalance:
+          type: number
+    OrderLine:
+      type: object
+      properties:
+        type:
+          type: string
+        item:
+          type: string
+        quantity:
+          type: integer
+        subTotal:
+          type: number
+        pricePerUnit:
+          type: number
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+    CreateOrderRequest:
+      type: object
+      required:
+      - type
+      - order
+      properties:
+        type:
+          type: string
+          enum:
+          - validate
+          - transaction
+          description: '"validate" to price-check, "transaction" to place the order.'
+        assign:
+          type: boolean
+          description: Whether to assign ordered bundles to the supplied eSIMs.
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+    InstallDetails:
+      type: object
+      properties:
+        iccid:
+          type: string
+        matchingId:
+          type: string
+          description: Activation code used with the SM-DP+ address to build the LPA QR.
+        smdpAddress:
+          type: string
+          description: SM-DP+ server address used for eSIM activation.
+        rspUrl:
+          type: string
+          description: Full LPA activation string (LPA:1$smdpAddress$matchingId).
+        appleInstallUrl:
+          type: string
+          description: Universal link install URL for iOS 17.4+ devices.
+        profileStatus:
+          type: string
+        pin:
+          type: string
+        puk:
+          type: string
+        firstInstalledDateTime:
+          type: string
+          format: date-time
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organisation API key. Find it under Account Settings -> API Details in your eSIM Go account and send it in the X-API-Key request header.

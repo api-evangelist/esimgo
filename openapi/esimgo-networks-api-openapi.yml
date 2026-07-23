@@ -1,0 +1,74 @@
+openapi: 3.0.1
+info:
+  title: eSIM Go Catalogue Networks API
+  description: REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.
+  termsOfService: https://www.esim-go.com
+  contact:
+    name: eSIM Go Support
+    url: https://docs.esim-go.com
+  version: '2.4'
+servers:
+- url: https://api.esim-go.com/v2.4
+security:
+- ApiKeyAuth: []
+tags:
+- name: Networks
+  description: Per-country network coverage data.
+paths:
+  /networks:
+    get:
+      operationId: getNetworks
+      tags:
+      - Networks
+      summary: Get Country Network Data
+      description: Returns per-country network coverage data, listing the mobile networks and supported speeds available for eSIM connectivity.
+      parameters:
+      - name: countries
+        in: query
+        schema:
+          type: string
+        description: Comma-separated ISO country codes to filter coverage.
+      responses:
+        '200':
+          description: Country network data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworksResponse'
+components:
+  schemas:
+    NetworksResponse:
+      type: object
+      properties:
+        countryNetworks:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              iso:
+                type: string
+              networks:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    brandName:
+                      type: string
+                    mcc:
+                      type: string
+                    mnc:
+                      type: string
+                    speed:
+                      type: array
+                      items:
+                        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organisation API key. Find it under Account Settings -> API Details in your eSIM Go account and send it in the X-API-Key request header.

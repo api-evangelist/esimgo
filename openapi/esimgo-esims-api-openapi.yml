@@ -1,0 +1,386 @@
+openapi: 3.0.1
+info:
+  title: eSIM Go Catalogue eSIMs API
+  description: REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.
+  termsOfService: https://www.esim-go.com
+  contact:
+    name: eSIM Go Support
+    url: https://docs.esim-go.com
+  version: '2.4'
+servers:
+- url: https://api.esim-go.com/v2.4
+security:
+- ApiKeyAuth: []
+tags:
+- name: eSIMs
+  description: Manage eSIMs, bundle assignments, and install details.
+paths:
+  /esims:
+    get:
+      operationId: listEsims
+      tags:
+      - eSIMs
+      summary: List eSIMs
+      description: Retrieves all eSIMs currently assigned to your organisation, with options for filtering and pagination.
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A list of eSIMs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EsimList'
+    put:
+      operationId: updateEsim
+      tags:
+      - eSIMs
+      summary: Update eSIM Details
+      description: Updates editable details (such as a customer reference) on an eSIM.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEsimRequest'
+      responses:
+        '200':
+          description: The updated eSIM.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Esim'
+  /esims/{iccid}:
+    get:
+      operationId: getEsim
+      tags:
+      - eSIMs
+      summary: Get eSIM details
+      description: Retrieves the details and status of a single eSIM by ICCID.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: eSIM detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Esim'
+  /esims/apply:
+    post:
+      operationId: applyBundleToEsim
+      tags:
+      - eSIMs
+      summary: Apply Bundle to an eSIM
+      description: Applies an existing bundle from inventory to an eSIM. Optionally allows reassignment to a new compatible eSIM if the supplied one is incompatible.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyBundleRequest'
+      responses:
+        '200':
+          description: The result of applying the bundle, including install details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignmentResult'
+  /esims/assignments:
+    get:
+      operationId: getEsimInstallDetails
+      tags:
+      - eSIMs
+      summary: Get eSIM Install Details
+      description: Returns install/activation details for eSIMs from one or more orders or bundle assignments, including matchingId, SM-DP+ address, and Apple install URL used to build the LPA QR code (LPA:1$smdpAddress$matchingId).
+      parameters:
+      - name: reference
+        in: query
+        schema:
+          type: string
+        description: Order reference to retrieve assignments for.
+      - name: iccid
+        in: query
+        schema:
+          type: string
+        description: Filter assignments by a specific eSIM ICCID.
+      responses:
+        '200':
+          description: Install details for the matching eSIM assignments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstallDetailsResponse'
+  /esims/{iccid}/history:
+    get:
+      operationId: getEsimHistory
+      tags:
+      - eSIMs
+      summary: Get eSIM history
+      description: Returns the lifecycle and status-change history of an eSIM.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: eSIM history records.
+          content:
+            application/json:
+              schema:
+                type: object
+  /esims/{iccid}/location:
+    get:
+      operationId: getEsimLocation
+      tags:
+      - eSIMs
+      summary: Get eSIM Location
+      description: Returns the last known network/country location of an eSIM.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: eSIM location.
+          content:
+            application/json:
+              schema:
+                type: object
+  /esims/{iccid}/sms:
+    post:
+      operationId: sendEsimSms
+      tags:
+      - eSIMs
+      summary: Send SMS to eSIM
+      description: Sends an SMS message to the eSIM.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                from:
+                  type: string
+      responses:
+        '200':
+          description: SMS accepted.
+  /esims/{iccid}/bundles:
+    get:
+      operationId: listEsimBundles
+      tags:
+      - eSIMs
+      summary: List Bundles applied to eSIM
+      description: Lists all bundles that have been applied to the eSIM.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Applied bundles.
+          content:
+            application/json:
+              schema:
+                type: object
+  /esims/{iccid}/bundles/{name}:
+    get:
+      operationId: getEsimBundleStatus
+      tags:
+      - eSIMs
+      summary: Get applied Bundle status
+      description: Retrieves the status and remaining allowance of an applied bundle.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Applied bundle status.
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      operationId: revokeEsimBundle
+      tags:
+      - eSIMs
+      summary: Revoke applied Bundle
+      description: Revokes an applied bundle from the eSIM.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bundle revoked.
+  /esims/{iccid}/compatible-bundle:
+    get:
+      operationId: checkBundleCompatibility
+      tags:
+      - eSIMs
+      summary: Check eSIM and Bundle Compatibility
+      description: Checks whether a bundle is compatible with the given eSIM.
+      parameters:
+      - name: iccid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        schema:
+          type: string
+        description: Bundle name to test for compatibility.
+      responses:
+        '200':
+          description: Compatibility result.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  compatible:
+                    type: boolean
+components:
+  schemas:
+    AssignmentResult:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+        assigned:
+          type: boolean
+    InstallDetailsResponse:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+    UpdateEsimRequest:
+      type: object
+      properties:
+        iccid:
+          type: string
+        customerRef:
+          type: string
+    Esim:
+      type: object
+      properties:
+        iccid:
+          type: string
+        matchingId:
+          type: string
+        smdpAddress:
+          type: string
+        profileStatus:
+          type: string
+        appleInstallUrl:
+          type: string
+        firstInstalledDateTime:
+          type: string
+          format: date-time
+        customerRef:
+          type: string
+        assignedDate:
+          type: string
+          format: date-time
+    EsimList:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Esim'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    ApplyBundleRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Bundle name to apply.
+        iccid:
+          type: string
+        allowReassign:
+          type: boolean
+        startTime:
+          type: string
+          format: date-time
+    InstallDetails:
+      type: object
+      properties:
+        iccid:
+          type: string
+        matchingId:
+          type: string
+          description: Activation code used with the SM-DP+ address to build the LPA QR.
+        smdpAddress:
+          type: string
+          description: SM-DP+ server address used for eSIM activation.
+        rspUrl:
+          type: string
+          description: Full LPA activation string (LPA:1$smdpAddress$matchingId).
+        appleInstallUrl:
+          type: string
+          description: Universal link install URL for iOS 17.4+ devices.
+        profileStatus:
+          type: string
+        pin:
+          type: string
+        puk:
+          type: string
+        firstInstalledDateTime:
+          type: string
+          format: date-time
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organisation API key. Find it under Account Settings -> API Details in your eSIM Go account and send it in the X-API-Key request header.

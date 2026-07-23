@@ -1,0 +1,164 @@
+openapi: 3.0.1
+info:
+  title: eSIM Go Catalogue API
+  description: REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.
+  termsOfService: https://www.esim-go.com
+  contact:
+    name: eSIM Go Support
+    url: https://docs.esim-go.com
+  version: '2.4'
+servers:
+- url: https://api.esim-go.com/v2.4
+security:
+- ApiKeyAuth: []
+tags:
+- name: Catalogue
+  description: Browse data bundles available to your organisation.
+paths:
+  /catalogue:
+    get:
+      operationId: getCatalogue
+      tags:
+      - Catalogue
+      summary: Get Bundle catalogue
+      description: Lists all data bundles available to your organisation for ordering. Bundle names returned here can be used with the /orders endpoint to place an order.
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+        description: Page number to return.
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+        description: Number of bundles per page.
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        description: Sort direction.
+      - name: orderBy
+        in: query
+        schema:
+          type: string
+        description: Column to sort by.
+      - name: description
+        in: query
+        schema:
+          type: string
+        description: Wildcard search filter on bundle description.
+      - name: group
+        in: query
+        schema:
+          type: string
+        description: Filter by Bundle Group.
+      - name: countries
+        in: query
+        schema:
+          type: string
+        description: Comma-separated ISO country codes.
+      - name: region
+        in: query
+        schema:
+          type: string
+        description: Filter by region.
+      responses:
+        '200':
+          description: A page of bundles available to the organisation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogueResponse'
+  /catalogue/{bundleName}:
+    get:
+      operationId: getCatalogueBundle
+      tags:
+      - Catalogue
+      summary: Get Bundle details from catalogue
+      description: Retrieves the full detail of a single bundle by its name.
+      parameters:
+      - name: bundleName
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique bundle name/identifier.
+      responses:
+        '200':
+          description: Bundle detail.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bundle'
+components:
+  schemas:
+    Bundle:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Unique bundle identifier.
+        description:
+          type: string
+        groups:
+          type: array
+          items:
+            type: string
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        dataAmount:
+          type: integer
+          description: Data allowance in MB.
+        duration:
+          type: integer
+          description: Validity period of the bundle in days.
+        speed:
+          type: array
+          items:
+            type: string
+        autostart:
+          type: boolean
+        unlimited:
+          type: boolean
+        roamingEnabled:
+          type: array
+          items:
+            type: string
+        price:
+          type: number
+          description: Cost in the organisation's currency.
+        billingType:
+          type: string
+          example: FixedCost
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+        iso:
+          type: string
+    CatalogueResponse:
+      type: object
+      properties:
+        bundles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bundle'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organisation API key. Find it under Account Settings -> API Details in your eSIM Go account and send it in the X-API-Key request header.

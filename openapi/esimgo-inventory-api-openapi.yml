@@ -1,0 +1,80 @@
+openapi: 3.0.1
+info:
+  title: eSIM Go Catalogue Inventory API
+  description: REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.
+  termsOfService: https://www.esim-go.com
+  contact:
+    name: eSIM Go Support
+    url: https://docs.esim-go.com
+  version: '2.4'
+servers:
+- url: https://api.esim-go.com/v2.4
+security:
+- ApiKeyAuth: []
+tags:
+- name: Inventory
+  description: View and refund unassigned bundle inventory.
+paths:
+  /inventory:
+    get:
+      operationId: getInventory
+      tags:
+      - Inventory
+      summary: Get bundle inventory
+      description: Returns the unassigned bundle inventory held by your organisation, grouped by bundle name with available quantities.
+      responses:
+        '200':
+          description: Bundle inventory.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+  /inventory/refund:
+    post:
+      operationId: refundInventoryBundle
+      tags:
+      - Inventory
+      summary: Refund bundle from inventory
+      description: Refunds an unused bundle held in inventory back to the organisation balance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Bundle name to refund.
+                quantity:
+                  type: integer
+      responses:
+        '200':
+          description: Refund result.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    InventoryResponse:
+      type: object
+      properties:
+        bundles:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              desc:
+                type: string
+              available:
+                type: integer
+                description: Quantity of this bundle available in inventory.
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Organisation API key. Find it under Account Settings -> API Details in your eSIM Go account and send it in the X-API-Key request header.
