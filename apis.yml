@@ -7,7 +7,20 @@ description: eSIM Go is an eSIM connectivity and travel-data platform that lets 
   services across 190+ countries, exposing a data-bundle catalogue, order placement,
   eSIM assignment, install/QR provisioning, inventory, network coverage, and usage
   webhooks.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/esimgo.png
 tags:
 - eSIM
 - Connectivity
@@ -18,111 +31,174 @@ created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.19'
 apis:
-- aid: esimgo:catalogue
+- aid: esimgo:esimgo-catalogue-api
   name: eSIM Go Catalogue API
-  tags:
-  - Catalogue
-  - Bundles
-  - Data Plans
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Browse data bundles available to your organisation.
   humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
   baseURL: https://api.esim-go.com/v2.4
-  properties:
-  - url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
-    type: Documentation
-  - url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
-    type: APIReference
-  - url: openapi/esimgo-openapi.yml
-    type: OpenAPI
-  description: Lists data bundles available to your organisation for ordering, with
-    filtering by country, region, group, and description, plus per-bundle detail by
-    name including data amount, duration, coverage, and price.
-- aid: esimgo:orders
-  name: eSIM Go Orders API
   tags:
-  - Orders
-  - Provisioning
-  - Bundles
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.esim-go.com/api/v2_4/operations/orders/post/
-  baseURL: https://api.esim-go.com/v2.4
+  - Catalogue
   properties:
-  - url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
-    type: Documentation
-  - url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
-    type: APIReference
-  - url: openapi/esimgo-openapi.yml
-    type: OpenAPI
-  description: Validates and processes bundle orders, optionally assigning bundles
-    to specified eSIM ICCIDs, with order listing and per-reference order detail retrieval.
-- aid: esimgo:esims
+  - type: OpenAPI
+    url: openapi/esimgo-catalogue-api-openapi.yml
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/esims/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/networks/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/
+- aid: esimgo:esimgo-esims-api
   name: eSIM Go eSIMs API
+  description: Manage eSIMs, bundle assignments, and install details.
+  humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  baseURL: https://api.esim-go.com/v2.4
   tags:
   - eSIMs
-  - Assignments
-  - QR Install
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.esim-go.com/api/v2_4/operations/esims/get/
-  baseURL: https://api.esim-go.com/v2.4
   properties:
-  - url: https://docs.esim-go.com/api/v2_4/operations/esims/get/
-    type: Documentation
-  - url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
-    type: APIReference
-  - url: openapi/esimgo-openapi.yml
-    type: OpenAPI
-  description: Manages eSIMs assigned to your organisation - list and detail, apply
-    bundles, retrieve install details (matchingId, SM-DP+ address, Apple install URL,
-    LPA QR data), history, location, SMS, and bundle revocation.
-- aid: esimgo:inventory
+  - type: OpenAPI
+    url: openapi/esimgo-esims-api-openapi.yml
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/esims/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/networks/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/
+- aid: esimgo:esimgo-inventory-api
   name: eSIM Go Inventory API
+  description: View and refund unassigned bundle inventory.
+  humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  baseURL: https://api.esim-go.com/v2.4
   tags:
   - Inventory
-  - Bundles
-  - Refund
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
-  baseURL: https://api.esim-go.com/v2.4
   properties:
-  - url: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
-    type: Documentation
-  - url: openapi/esimgo-openapi.yml
-    type: OpenAPI
-  description: Reports the unassigned bundle inventory held by your organisation and
-    supports refunding an unused bundle back from inventory.
-- aid: esimgo:network
-  name: eSIM Go Network API
+  - type: OpenAPI
+    url: openapi/esimgo-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/esims/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/networks/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/
+- aid: esimgo:esimgo-networks-api
+  name: eSIM Go Networks API
+  description: Per-country network coverage data.
+  humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  baseURL: https://api.esim-go.com/v2.4
   tags:
-  - Network
-  - Coverage
-  - Countries
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.esim-go.com/api/v2_4/operations/networks/get/
-  baseURL: https://api.esim-go.com/v2.4
+  - Networks
   properties:
-  - url: https://docs.esim-go.com/api/v2_4/operations/networks/get/
-    type: Documentation
-  - url: openapi/esimgo-openapi.yml
-    type: OpenAPI
-  description: Returns per-country network coverage data, including the mobile networks
-    and supported speeds available for eSIM connectivity in each market.
-- aid: esimgo:webhooks
-  name: eSIM Go Webhooks
+  - type: OpenAPI
+    url: openapi/esimgo-networks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/esims/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/networks/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/
+- aid: esimgo:esimgo-orders-api
+  name: eSIM Go Orders API
+  description: Validate, place, and retrieve bundle orders.
+  humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  baseURL: https://api.esim-go.com/v2.4
   tags:
-  - Webhooks
-  - Callbacks
-  - Usage
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.esim-go.com/api/v2_4/
-  baseURL: https://api.esim-go.com/v2.4
+  - Orders
   properties:
-  - url: https://docs.esim-go.com/api/v2_4/
-    type: Documentation
-  - url: openapi/esimgo-openapi.yml
-    type: OpenAPI
-  description: Server-to-server callbacks that POST eSIM usage and status events to
-    a partner-configured callback URL, enabling real-time tracking of data consumption
-    and bundle state changes.
+  - type: OpenAPI
+    url: openapi/esimgo-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/esims/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/networks/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/
+- aid: esimgo:esimgo-organisation-api
+  name: eSIM Go Organisation API
+  description: Organisation account details and balance.
+  humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  baseURL: https://api.esim-go.com/v2.4
+  tags:
+  - Organisation
+  properties:
+  - type: OpenAPI
+    url: openapi/esimgo-organisation-api-openapi.yml
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/orders/post/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/esims/get/
+  - type: APIReference
+    url: https://docs.esim-go.com/api/v2_4/operations/esimsassignments/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/inventory/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/operations/networks/get/
+  - type: Documentation
+    url: https://docs.esim-go.com/api/v2_4/
 common:
 - type: AgenticAccess
   url: agentic-access/esimgo-agentic-access.yml
