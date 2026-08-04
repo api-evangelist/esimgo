@@ -1,0 +1,24 @@
+{
+  "provider": "esimgo",
+  "sources": [
+    "esimgo-catalogue-api-openapi.yml",
+    "esimgo-esims-api-openapi.yml",
+    "esimgo-inventory-api-openapi.yml",
+    "esimgo-networks-api-openapi.yml",
+    "esimgo-orders-api-openapi.yml",
+    "esimgo-organisation-api-openapi.yml"
+  ],
+  "outputs": [
+    "esimgo-catalogue-api-openapi.yml",
+    "esimgo-esims-api-openapi.yml",
+    "esimgo-inventory-api-openapi.yml",
+    "esimgo-networks-api-openapi.yml",
+    "esimgo-orders-api-openapi.yml",
+    "esimgo-organisation-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
