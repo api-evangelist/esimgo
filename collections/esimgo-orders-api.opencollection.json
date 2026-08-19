@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "eSIM Go Catalogue Orders API",
+    "version": "2.4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/orders",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists orders placed by your organisation."
+        },
+        {
+          "info": {
+            "name": "Create orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.esim-go.com/v2.4/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates or processes an order. Set type to \"validate\" to price-check an order without charging, or \"transaction\" to place it. When assign is true and ICCIDs are supplied, ordered bundles are assigned to those eSIMs."
+        },
+        {
+          "info": {
+            "name": "Get order detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/orders/:orderReference",
+            "params": [
+              {
+                "name": "orderReference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the detail of a single order by its reference."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

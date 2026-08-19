@@ -1,0 +1,1278 @@
+{
+  "item": [
+    {
+      "id": "8492ebe1-8aae-48bd-84d7-ae0a3391f6e1",
+      "name": "eSIMs",
+      "description": {
+        "content": "Manage eSIMs, bundle assignments, and install details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9fb33672-235e-4773-8b68-9e6120036aa2",
+          "name": "List eSIMs",
+          "request": {
+            "name": "List eSIMs",
+            "description": {
+              "content": "Retrieves all eSIMs currently assigned to your organisation, with options for filtering and pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06b52206-48c9-4d38-979b-251484227056",
+              "name": "A list of eSIMs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"esims\": [\n    {\n      \"iccid\": \"string\",\n      \"matchingId\": \"string\",\n      \"smdpAddress\": \"string\",\n      \"profileStatus\": \"string\",\n      \"appleInstallUrl\": \"string\",\n      \"firstInstalledDateTime\": \"2002-07-05T18:53:32.572Z\",\n      \"customerRef\": \"string\",\n      \"assignedDate\": \"1974-08-23T03:44:19.392Z\"\n    },\n    {\n      \"iccid\": \"string\",\n      \"matchingId\": \"string\",\n      \"smdpAddress\": \"string\",\n      \"profileStatus\": \"string\",\n      \"appleInstallUrl\": \"string\",\n      \"firstInstalledDateTime\": \"1953-02-01T20:14:07.331Z\",\n      \"customerRef\": \"string\",\n      \"assignedDate\": \"2013-08-27T08:43:20.760Z\"\n    }\n  ],\n  \"pageCount\": 8081,\n  \"rows\": 5474\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b850f0d-be2b-4949-9367-6bb3dcae7bba",
+          "name": "Update eSIM Details",
+          "request": {
+            "name": "Update eSIM Details",
+            "description": {
+              "content": "Updates editable details (such as a customer reference) on an eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"iccid\": \"<string>\",\n  \"customerRef\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5a13cb67-381f-45db-9cc8-f16945ddc5b5",
+              "name": "The updated eSIM.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"iccid\": \"<string>\",\n  \"customerRef\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iccid\": \"string\",\n  \"matchingId\": \"string\",\n  \"smdpAddress\": \"string\",\n  \"profileStatus\": \"string\",\n  \"appleInstallUrl\": \"string\",\n  \"firstInstalledDateTime\": \"1979-05-09T13:36:44.040Z\",\n  \"customerRef\": \"string\",\n  \"assignedDate\": \"1986-02-23T09:14:03.612Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab2ff345-537c-4b2f-a306-f9ff11aafcd7",
+          "name": "Get eSIM details",
+          "request": {
+            "name": "Get eSIM details",
+            "description": {
+              "content": "Retrieves the details and status of a single eSIM by ICCID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b60f7bce-59e7-4b48-8203-67198c06613b",
+              "name": "eSIM detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iccid\": \"string\",\n  \"matchingId\": \"string\",\n  \"smdpAddress\": \"string\",\n  \"profileStatus\": \"string\",\n  \"appleInstallUrl\": \"string\",\n  \"firstInstalledDateTime\": \"1979-05-09T13:36:44.040Z\",\n  \"customerRef\": \"string\",\n  \"assignedDate\": \"1986-02-23T09:14:03.612Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4cbddef-0d84-48ac-9d66-1fcabe7aed7e",
+          "name": "Apply Bundle to an eSIM",
+          "request": {
+            "name": "Apply Bundle to an eSIM",
+            "description": {
+              "content": "Applies an existing bundle from inventory to an eSIM. Optionally allows reassignment to a new compatible eSIM if the supplied one is incompatible.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                "apply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"iccid\": \"<string>\",\n  \"allowReassign\": \"<boolean>\",\n  \"startTime\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b2a5d79-764f-4a52-946b-6d5b1be47104",
+              "name": "The result of applying the bundle, including install details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"iccid\": \"<string>\",\n  \"allowReassign\": \"<boolean>\",\n  \"startTime\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"esims\": [\n    {\n      \"iccid\": \"string\",\n      \"matchingId\": \"string\",\n      \"smdpAddress\": \"string\",\n      \"rspUrl\": \"string\",\n      \"appleInstallUrl\": \"string\",\n      \"profileStatus\": \"string\",\n      \"pin\": \"string\",\n      \"puk\": \"string\",\n      \"firstInstalledDateTime\": \"1977-04-09T20:34:15.501Z\"\n    },\n    {\n      \"iccid\": \"string\",\n      \"matchingId\": \"string\",\n      \"smdpAddress\": \"string\",\n      \"rspUrl\": \"string\",\n      \"appleInstallUrl\": \"string\",\n      \"profileStatus\": \"string\",\n      \"pin\": \"string\",\n      \"puk\": \"string\",\n      \"firstInstalledDateTime\": \"2022-09-27T01:26:41.013Z\"\n    }\n  ],\n  \"assigned\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7694951b-6421-42b9-90c9-572e41f9a7e8",
+          "name": "Get eSIM Install Details",
+          "request": {
+            "name": "Get eSIM Install Details",
+            "description": {
+              "content": "Returns install/activation details for eSIMs from one or more orders or bundle assignments, including matchingId, SM-DP+ address, and Apple install URL used to build the LPA QR code (LPA:1$smdpAddress$matchingId).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                "assignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "reference",
+                  "value": "<string>",
+                  "description": "Order reference to retrieve assignments for."
+                },
+                {
+                  "disabled": false,
+                  "key": "iccid",
+                  "value": "<string>",
+                  "description": "Filter assignments by a specific eSIM ICCID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "478c492d-0fed-4414-87cd-ab554008b3f1",
+              "name": "Install details for the matching eSIM assignments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "iccid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"esims\": [\n    {\n      \"iccid\": \"string\",\n      \"matchingId\": \"string\",\n      \"smdpAddress\": \"string\",\n      \"rspUrl\": \"string\",\n      \"appleInstallUrl\": \"string\",\n      \"profileStatus\": \"string\",\n      \"pin\": \"string\",\n      \"puk\": \"string\",\n      \"firstInstalledDateTime\": \"1948-11-24T00:21:32.058Z\"\n    },\n    {\n      \"iccid\": \"string\",\n      \"matchingId\": \"string\",\n      \"smdpAddress\": \"string\",\n      \"rspUrl\": \"string\",\n      \"appleInstallUrl\": \"string\",\n      \"profileStatus\": \"string\",\n      \"pin\": \"string\",\n      \"puk\": \"string\",\n      \"firstInstalledDateTime\": \"2008-07-13T18:29:33.778Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e3b7be1-9cb4-4ae9-b06c-12cfe5a3da5a",
+          "name": "Get eSIM history",
+          "request": {
+            "name": "Get eSIM history",
+            "description": {
+              "content": "Returns the lifecycle and status-change history of an eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c99220d-4310-49a7-a1ca-b4800f352c43",
+              "name": "eSIM history records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38a487af-bea9-4eac-96ae-ef4439be759a",
+          "name": "Get eSIM Location",
+          "request": {
+            "name": "Get eSIM Location",
+            "description": {
+              "content": "Returns the last known network/country location of an eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid",
+                "location"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "789f1c91-312f-4ebd-a805-8743c21418d4",
+              "name": "eSIM location.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid",
+                    "location"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36eebedb-a61a-4261-ab3f-70a00f047c82",
+          "name": "Send SMS to eSIM",
+          "request": {
+            "name": "Send SMS to eSIM",
+            "description": {
+              "content": "Sends an SMS message to the eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid",
+                "sms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\",\n  \"from\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "564cae25-97be-483b-80d6-cd4f62322b17",
+              "name": "SMS accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid",
+                    "sms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\",\n  \"from\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb326332-f05a-4ad6-8b4c-f23da29ad816",
+          "name": "List Bundles applied to eSIM",
+          "request": {
+            "name": "List Bundles applied to eSIM",
+            "description": {
+              "content": "Lists all bundles that have been applied to the eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid",
+                "bundles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a10d3fa0-b7d0-4d28-93ca-979fc215fc1b",
+              "name": "Applied bundles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid",
+                    "bundles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f78ac76-fd72-4fc5-b2c1-a28ba50ec66a",
+          "name": "Get applied Bundle status",
+          "request": {
+            "name": "Get applied Bundle status",
+            "description": {
+              "content": "Retrieves the status and remaining allowance of an applied bundle.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid",
+                "bundles",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1108410-c717-4b69-80e9-fe9af82e1567",
+              "name": "Applied bundle status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid",
+                    "bundles",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08a56963-5e59-4c4c-bbc9-2c397a505261",
+          "name": "Revoke applied Bundle",
+          "request": {
+            "name": "Revoke applied Bundle",
+            "description": {
+              "content": "Revokes an applied bundle from the eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid",
+                "bundles",
+                ":name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b726633-46cd-498d-ab99-74608881ed38",
+              "name": "Bundle revoked.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid",
+                    "bundles",
+                    ":name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "276ee646-4dde-4780-b98e-c7d6f9982ea7",
+          "name": "Check eSIM and Bundle Compatibility",
+          "request": {
+            "name": "Check eSIM and Bundle Compatibility",
+            "description": {
+              "content": "Checks whether a bundle is compatible with the given eSIM.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "esims",
+                ":iccid",
+                "compatible-bundle"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Bundle name to test for compatibility."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iccid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3f2f9854-4d43-476e-8f79-b3088986a010",
+              "name": "Compatibility result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "esims",
+                    ":iccid",
+                    "compatible-bundle"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iccid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"compatible\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.esim-go.com/v2.4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f3182e15-71a9-472e-a182-6fc55de61cc3",
+    "name": "eSIM Go Catalogue eSIMs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.\n\nContact Support:\n Name: eSIM Go Support",
+      "type": "text/plain"
+    }
+  }
+}

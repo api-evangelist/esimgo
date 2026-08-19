@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "eSIM Go Catalogue API",
+    "version": "2.4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogue",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Bundle catalogue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/catalogue",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to return."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "Number of bundles per page."
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Column to sort by."
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard search filter on bundle description."
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Bundle Group."
+              },
+              {
+                "name": "countries",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated ISO country codes."
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Filter by region."
+              }
+            ]
+          },
+          "docs": "Lists all data bundles available to your organisation for ordering. Bundle names returned here can be used with the /orders endpoint to place an order."
+        },
+        {
+          "info": {
+            "name": "Get Bundle details from catalogue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/catalogue/:bundleName",
+            "params": [
+              {
+                "name": "bundleName",
+                "value": "",
+                "type": "path",
+                "description": "The unique bundle name/identifier."
+              }
+            ]
+          },
+          "docs": "Retrieves the full detail of a single bundle by its name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

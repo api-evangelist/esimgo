@@ -1,0 +1,139 @@
+{
+  "item": [
+    {
+      "id": "7120d534-6711-4a82-9ed0-8a20b2e39d69",
+      "name": "Networks",
+      "description": {
+        "content": "Per-country network coverage data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43c52ac3-74a1-4ac7-95c8-1c2a20d37c78",
+          "name": "Get Country Network Data",
+          "request": {
+            "name": "Get Country Network Data",
+            "description": {
+              "content": "Returns per-country network coverage data, listing the mobile networks and supported speeds available for eSIM connectivity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "networks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "countries",
+                  "value": "<string>",
+                  "description": "Comma-separated ISO country codes to filter coverage."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9097da6-4ece-427f-b377-749e629f9c24",
+              "name": "Country network data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "networks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "countries",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"countryNetworks\": [\n    {\n      \"name\": \"string\",\n      \"iso\": \"string\",\n      \"networks\": [\n        {\n          \"name\": \"string\",\n          \"brandName\": \"string\",\n          \"mcc\": \"string\",\n          \"mnc\": \"string\",\n          \"speed\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"brandName\": \"string\",\n          \"mcc\": \"string\",\n          \"mnc\": \"string\",\n          \"speed\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"iso\": \"string\",\n      \"networks\": [\n        {\n          \"name\": \"string\",\n          \"brandName\": \"string\",\n          \"mcc\": \"string\",\n          \"mnc\": \"string\",\n          \"speed\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"name\": \"string\",\n          \"brandName\": \"string\",\n          \"mcc\": \"string\",\n          \"mnc\": \"string\",\n          \"speed\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.esim-go.com/v2.4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64c8651c-2b88-4120-b2b4-04423d351e36",
+    "name": "eSIM Go Catalogue Networks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.\n\nContact Support:\n Name: eSIM Go Support",
+      "type": "text/plain"
+    }
+  }
+}

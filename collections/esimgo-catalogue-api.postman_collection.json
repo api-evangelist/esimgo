@@ -1,0 +1,305 @@
+{
+  "item": [
+    {
+      "id": "ef47905b-68c5-4c98-8b54-cd3d41fba138",
+      "name": "Catalogue",
+      "description": {
+        "content": "Browse data bundles available to your organisation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3ffdcca5-81fb-4d24-8c35-caa10d942edc",
+          "name": "Get Bundle catalogue",
+          "request": {
+            "name": "Get Bundle catalogue",
+            "description": {
+              "content": "Lists all data bundles available to your organisation for ordering. Bundle names returned here can be used with the /orders endpoint to place an order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalogue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>",
+                  "description": "Number of bundles per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "Sort direction."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Column to sort by."
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Wildcard search filter on bundle description."
+                },
+                {
+                  "disabled": false,
+                  "key": "group",
+                  "value": "<string>",
+                  "description": "Filter by Bundle Group."
+                },
+                {
+                  "disabled": false,
+                  "key": "countries",
+                  "value": "<string>",
+                  "description": "Comma-separated ISO country codes."
+                },
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Filter by region."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c33a95b4-62d3-405d-bbd9-1f33471d15fa",
+              "name": "A page of bundles available to the organisation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalogue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "countries",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"bundles\": [\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"countries\": [\n        {\n          \"name\": \"string\",\n          \"region\": \"string\",\n          \"iso\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"region\": \"string\",\n          \"iso\": \"string\"\n        }\n      ],\n      \"dataAmount\": 6418,\n      \"duration\": 3922,\n      \"speed\": [\n        \"string\",\n        \"string\"\n      ],\n      \"autostart\": false,\n      \"unlimited\": false,\n      \"roamingEnabled\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": 9415.41933305906,\n      \"billingType\": \"FixedCost\"\n    },\n    {\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"countries\": [\n        {\n          \"name\": \"string\",\n          \"region\": \"string\",\n          \"iso\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"region\": \"string\",\n          \"iso\": \"string\"\n        }\n      ],\n      \"dataAmount\": 3404,\n      \"duration\": 2875,\n      \"speed\": [\n        \"string\",\n        \"string\"\n      ],\n      \"autostart\": true,\n      \"unlimited\": true,\n      \"roamingEnabled\": [\n        \"string\",\n        \"string\"\n      ],\n      \"price\": 9901.476666005627,\n      \"billingType\": \"FixedCost\"\n    }\n  ],\n  \"pageCount\": 6877,\n  \"rows\": 7244\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ad5b7e2-08f0-4349-b965-4de82bb625e4",
+          "name": "Get Bundle details from catalogue",
+          "request": {
+            "name": "Get Bundle details from catalogue",
+            "description": {
+              "content": "Retrieves the full detail of a single bundle by its name.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalogue",
+                ":bundleName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "bundleName",
+                  "description": "(Required) The unique bundle name/identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6be67ef7-96ef-480d-9921-12a377abf6b2",
+              "name": "Bundle detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalogue",
+                    ":bundleName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "bundleName",
+                      "description": "(Required) The unique bundle name/identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"groups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"countries\": [\n    {\n      \"name\": \"string\",\n      \"region\": \"string\",\n      \"iso\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"region\": \"string\",\n      \"iso\": \"string\"\n    }\n  ],\n  \"dataAmount\": 5325,\n  \"duration\": 2623,\n  \"speed\": [\n    \"string\",\n    \"string\"\n  ],\n  \"autostart\": false,\n  \"unlimited\": true,\n  \"roamingEnabled\": [\n    \"string\",\n    \"string\"\n  ],\n  \"price\": 1088.8467971966586,\n  \"billingType\": \"FixedCost\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.esim-go.com/v2.4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fd305633-703a-4c14-9fbf-a0d004612d7b",
+    "name": "eSIM Go Catalogue API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.\n\nContact Support:\n Name: eSIM Go Support",
+      "type": "text/plain"
+    }
+  }
+}

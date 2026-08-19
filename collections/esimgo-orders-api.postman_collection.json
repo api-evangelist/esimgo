@@ -1,0 +1,342 @@
+{
+  "item": [
+    {
+      "id": "fd219c46-7d2d-448e-9338-f8e73edeb901",
+      "name": "Orders",
+      "description": {
+        "content": "Validate, place, and retrieve bundle orders.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c3ec7c13-2952-44b2-b433-ebc010de0b89",
+          "name": "List orders",
+          "request": {
+            "name": "List orders",
+            "description": {
+              "content": "Lists orders placed by your organisation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1863970c-6d46-4d53-b299-3e6750f23f63",
+              "name": "A list of orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"order\": [\n        {\n          \"type\": \"string\",\n          \"item\": \"string\",\n          \"quantity\": 7866,\n          \"subTotal\": 7354.706556640008,\n          \"pricePerUnit\": 5323.907944450447,\n          \"esims\": [\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"item\": \"string\",\n          \"quantity\": 5910,\n          \"subTotal\": 1468.616121284768,\n          \"pricePerUnit\": 3653.124590600861,\n          \"esims\": [\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"total\": 5309.449374513363,\n      \"currency\": \"string\",\n      \"valid\": true,\n      \"createdDate\": \"2018-09-04T15:49:02.425Z\",\n      \"assigned\": true,\n      \"status\": \"string\",\n      \"statusMessage\": \"string\",\n      \"orderReference\": \"string\",\n      \"runningBalance\": 5845.627101530552\n    },\n    {\n      \"order\": [\n        {\n          \"type\": \"string\",\n          \"item\": \"string\",\n          \"quantity\": 2754,\n          \"subTotal\": 4283.688937599211,\n          \"pricePerUnit\": 6899.242145615995,\n          \"esims\": [\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"type\": \"string\",\n          \"item\": \"string\",\n          \"quantity\": 2046,\n          \"subTotal\": 6717.634947872948,\n          \"pricePerUnit\": 5440.379295091977,\n          \"esims\": [\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"iccid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"matchingId\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"smdpAddress\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"rspUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"appleInstallUrl\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"profileStatus\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"pin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"puk\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"firstInstalledDateTime\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"total\": 8826.934276488511,\n      \"currency\": \"string\",\n      \"valid\": true,\n      \"createdDate\": \"2011-04-12T17:53:08.376Z\",\n      \"assigned\": true,\n      \"status\": \"string\",\n      \"statusMessage\": \"string\",\n      \"orderReference\": \"string\",\n      \"runningBalance\": 6175.449639835533\n    }\n  ],\n  \"pageCount\": 9487,\n  \"rows\": 2521\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2ec345f-3939-4cf7-9fe8-96beeb747e5d",
+          "name": "Create orders",
+          "request": {
+            "name": "Create orders",
+            "description": {
+              "content": "Validates or processes an order. Set type to \"validate\" to price-check an order without charging, or \"transaction\" to place it. When assign is true and ICCIDs are supplied, ordered bundles are assigned to those eSIMs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"order\": [\n    {\n      \"type\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"item\": \"<string>\",\n      \"iccids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowReassign\": \"<boolean>\",\n      \"profileID\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"item\": \"<string>\",\n      \"iccids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowReassign\": \"<boolean>\",\n      \"profileID\": \"<string>\"\n    }\n  ],\n  \"assign\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23fe23a7-ebd3-40e8-b17e-9b584a79327a",
+              "name": "Order validation or transaction result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"order\": [\n    {\n      \"type\": \"bundle\",\n      \"quantity\": \"<integer>\",\n      \"item\": \"<string>\",\n      \"iccids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowReassign\": \"<boolean>\",\n      \"profileID\": \"<string>\"\n    },\n    {\n      \"type\": \"bundle\",\n      \"quantity\": \"<integer>\",\n      \"item\": \"<string>\",\n      \"iccids\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"allowReassign\": \"<boolean>\",\n      \"profileID\": \"<string>\"\n    }\n  ],\n  \"assign\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order\": [\n    {\n      \"type\": \"string\",\n      \"item\": \"string\",\n      \"quantity\": 6027,\n      \"subTotal\": 4401.156298613498,\n      \"pricePerUnit\": 8311.075944604085,\n      \"esims\": [\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"2004-08-09T20:50:07.132Z\"\n        },\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"1977-11-11T12:26:34.827Z\"\n        }\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"item\": \"string\",\n      \"quantity\": 7298,\n      \"subTotal\": 5809.412258565434,\n      \"pricePerUnit\": 8037.085852463927,\n      \"esims\": [\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"1967-11-29T04:56:13.387Z\"\n        },\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"2021-01-08T20:22:31.040Z\"\n        }\n      ]\n    }\n  ],\n  \"total\": 2941.1443124877223,\n  \"currency\": \"string\",\n  \"valid\": true,\n  \"createdDate\": \"1988-04-11T01:49:00.575Z\",\n  \"assigned\": true,\n  \"status\": \"string\",\n  \"statusMessage\": \"string\",\n  \"orderReference\": \"string\",\n  \"runningBalance\": 2314.4370523821167\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7a1269f-66c3-40d6-adc5-a91b3fddebc0",
+          "name": "Get order detail",
+          "request": {
+            "name": "Get order detail",
+            "description": {
+              "content": "Retrieves the detail of a single order by its reference.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "orders",
+                ":orderReference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderReference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc20729d-ef6b-47b8-8b8b-dc1a1102f58f",
+              "name": "Order detail.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "orders",
+                    ":orderReference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderReference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"order\": [\n    {\n      \"type\": \"string\",\n      \"item\": \"string\",\n      \"quantity\": 6027,\n      \"subTotal\": 4401.156298613498,\n      \"pricePerUnit\": 8311.075944604085,\n      \"esims\": [\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"2004-08-09T20:50:07.132Z\"\n        },\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"1977-11-11T12:26:34.827Z\"\n        }\n      ]\n    },\n    {\n      \"type\": \"string\",\n      \"item\": \"string\",\n      \"quantity\": 7298,\n      \"subTotal\": 5809.412258565434,\n      \"pricePerUnit\": 8037.085852463927,\n      \"esims\": [\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"1967-11-29T04:56:13.387Z\"\n        },\n        {\n          \"iccid\": \"string\",\n          \"matchingId\": \"string\",\n          \"smdpAddress\": \"string\",\n          \"rspUrl\": \"string\",\n          \"appleInstallUrl\": \"string\",\n          \"profileStatus\": \"string\",\n          \"pin\": \"string\",\n          \"puk\": \"string\",\n          \"firstInstalledDateTime\": \"2021-01-08T20:22:31.040Z\"\n        }\n      ]\n    }\n  ],\n  \"total\": 2941.1443124877223,\n  \"currency\": \"string\",\n  \"valid\": true,\n  \"createdDate\": \"1988-04-11T01:49:00.575Z\",\n  \"assigned\": true,\n  \"status\": \"string\",\n  \"statusMessage\": \"string\",\n  \"orderReference\": \"string\",\n  \"runningBalance\": 2314.4370523821167\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.esim-go.com/v2.4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0eb6410a-3b06-4f66-a317-b62b8e30be46",
+    "name": "eSIM Go Catalogue Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.\n\nContact Support:\n Name: eSIM Go Support",
+      "type": "text/plain"
+    }
+  }
+}

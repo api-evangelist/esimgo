@@ -1,0 +1,268 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "eSIM Go Catalogue eSIMs API",
+    "version": "2.4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "eSIMs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List eSIMs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all eSIMs currently assigned to your organisation, with options for filtering and pagination."
+        },
+        {
+          "info": {
+            "name": "Update eSIM Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.esim-go.com/v2.4/esims",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates editable details (such as a customer reference) on an eSIM."
+        },
+        {
+          "info": {
+            "name": "Get eSIM details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details and status of a single eSIM by ICCID."
+        },
+        {
+          "info": {
+            "name": "Apply Bundle to an eSIM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.esim-go.com/v2.4/esims/apply",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies an existing bundle from inventory to an eSIM. Optionally allows reassignment to a new compatible eSIM if the supplied one is incompatible."
+        },
+        {
+          "info": {
+            "name": "Get eSIM Install Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/assignments",
+            "params": [
+              {
+                "name": "reference",
+                "value": "",
+                "type": "query",
+                "description": "Order reference to retrieve assignments for."
+              },
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "query",
+                "description": "Filter assignments by a specific eSIM ICCID."
+              }
+            ]
+          },
+          "docs": "Returns install/activation details for eSIMs from one or more orders or bundle assignments, including matchingId, SM-DP+ address, and Apple install URL used to build the LPA QR code (LPA:1$smdpAddress$matchingId)."
+        },
+        {
+          "info": {
+            "name": "Get eSIM history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid/history",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the lifecycle and status-change history of an eSIM."
+        },
+        {
+          "info": {
+            "name": "Get eSIM Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid/location",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the last known network/country location of an eSIM."
+        },
+        {
+          "info": {
+            "name": "Send SMS to eSIM",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid/sms",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an SMS message to the eSIM."
+        },
+        {
+          "info": {
+            "name": "List Bundles applied to eSIM",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid/bundles",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists all bundles that have been applied to the eSIM."
+        },
+        {
+          "info": {
+            "name": "Get applied Bundle status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid/bundles/:name",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the status and remaining allowance of an applied bundle."
+        },
+        {
+          "info": {
+            "name": "Revoke applied Bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid/bundles/:name",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revokes an applied bundle from the eSIM."
+        },
+        {
+          "info": {
+            "name": "Check eSIM and Bundle Compatibility",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/esims/:iccid/compatible-bundle",
+            "params": [
+              {
+                "name": "iccid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Bundle name to test for compatibility."
+              }
+            ]
+          },
+          "docs": "Checks whether a bundle is compatible with the given eSIM."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

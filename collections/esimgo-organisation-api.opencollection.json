@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "eSIM Go Catalogue Organisation API",
+    "version": "2.4"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organisation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current Organisation Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/organisation"
+          },
+          "docs": "Returns the current organisation account details, including balance and currency."
+        },
+        {
+          "info": {
+            "name": "Get Bundle Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.esim-go.com/v2.4/organisation/groups"
+          },
+          "docs": "Returns the bundle groups available to the organisation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
