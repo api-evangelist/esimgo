@@ -65,6 +65,8 @@ apis:
   humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
   baseURL: https://api.esim-go.com/v2.4
   tags:
+  - eSIM
+  tags_raw:
   - eSIMs
   properties:
   - type: OpenAPI
@@ -149,6 +151,8 @@ apis:
   humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
   baseURL: https://api.esim-go.com/v2.4
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
