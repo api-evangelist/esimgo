@@ -1,0 +1,45 @@
+slug: esimgo
+provider: eSIM Go
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: eSIMs
+  spec_file: esimgo-esims-api-openapi.yml
+  capability_id: BC-2640.20
+  capability_id_l1: BC-2640
+  capability_name: SIM & eSIM Lifecycle Management
+  confidence: 0.9
+  evidence: GET /esims/{iccid} Get eSIM details; GET /esims/assignments Get eSIM Install Details; POST
+    /esims/apply Apply Bundle to an eSIM; DELETE /esims/{iccid}/bundles/{name} Revoke applied Bundle
+  reason: Operations manage the lifecycle of eSIM profiles keyed by ICCID — listing, updating, retrieving
+    install/QR provisioning details, applying and revoking data bundles, history and location. This is
+    squarely SIM & eSIM lifecycle management within telecom subscriber management.
+- tag: Catalogue
+  spec_file: esimgo-catalogue-api-openapi.yml
+  capability_id: BC-2650.40
+  capability_id_l1: BC-2650
+  capability_name: Product Catalogue Publication
+  confidence: 0.7
+  evidence: GET /catalogue  getCatalogue  Get Bundle catalogue; GET /catalogue/{bundleName}  getCatalogueBundle  Get
+    Bundle details from catalogue
+  reason: Exposes the telecom data-bundle product catalogue to reseller channels, i.e. catalogue publication/consumption
+    of telecom offers. L2 choice (publication vs offer design) carries some ambiguity.
+- tag: Orders
+  spec_file: esimgo-orders-api-openapi.yml
+  capability_id: BC-2620.10
+  capability_id_l1: BC-2620
+  capability_name: Service Order Capture
+  confidence: 0.7
+  evidence: POST /orders  createOrder  Create orders; schemas OrderLine, InstallDetails, OrderList
+  reason: Captures and tracks orders for eSIM connectivity bundles including install details — service
+    order capture in a telecom fulfilment flow. Some ambiguity versus generic order fulfilment.

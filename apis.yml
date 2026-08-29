@@ -216,6 +216,9 @@ apis:
   - type: Documentation
     url: https://docs.esim-go.com/api/v2_4/
 common:
+- type: CapabilityMap
+  url: capabilities/esimgo-capability-edges.yml
+  name: eSIM Go Business Capability Map
 - type: AgenticAccess
   url: agentic-access/esimgo-agentic-access.yml
 - type: DomainSecurity
