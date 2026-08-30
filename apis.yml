@@ -77,7 +77,7 @@ apis:
   humanURL: https://docs.esim-go.com/api/v2_4/operations/catalogue/get/
   baseURL: https://api.esim-go.com/v2.4
   tags:
-  - eSIM
+  - eSIMs
   tags_raw:
   - eSIMs
   properties:
