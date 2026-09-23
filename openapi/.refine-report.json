@@ -1,24 +1,30 @@
 {
   "provider": "esimgo",
   "sources": [
-    "esimgo-catalogue-api-openapi.yml",
-    "esimgo-esims-api-openapi.yml",
-    "esimgo-inventory-api-openapi.yml",
-    "esimgo-networks-api-openapi.yml",
-    "esimgo-orders-api-openapi.yml",
-    "esimgo-organisation-api-openapi.yml"
+    "_original/esimgo-openapi.yml"
   ],
   "outputs": [
     "esimgo-catalogue-api-openapi.yml",
-    "esimgo-esims-api-openapi.yml",
     "esimgo-inventory-api-openapi.yml",
     "esimgo-networks-api-openapi.yml",
     "esimgo-orders-api-openapi.yml",
-    "esimgo-organisation-api-openapi.yml"
+    "esimgo-organisation-api-openapi.yml",
+    "esimgo-esims-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "esimgo-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "esimgo-catalogue-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "esimgo-esims-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "esimgo-inventory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "esimgo-networks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "esimgo-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "esimgo-organisation-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

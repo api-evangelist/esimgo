@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: eSIM Go Catalogue eSIMs API
+  title: eSIM Go E SI Ms API
   description: REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.
   termsOfService: https://www.esim-go.com
   contact:
@@ -284,29 +284,6 @@ paths:
                     type: boolean
 components:
   schemas:
-    AssignmentResult:
-      type: object
-      properties:
-        esims:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallDetails'
-        assigned:
-          type: boolean
-    InstallDetailsResponse:
-      type: object
-      properties:
-        esims:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallDetails'
-    UpdateEsimRequest:
-      type: object
-      properties:
-        iccid:
-          type: string
-        customerRef:
-          type: string
     Esim:
       type: object
       properties:
@@ -328,17 +305,13 @@ components:
         assignedDate:
           type: string
           format: date-time
-    EsimList:
+    InstallDetailsResponse:
       type: object
       properties:
         esims:
           type: array
           items:
-            $ref: '#/components/schemas/Esim'
-        pageCount:
-          type: integer
-        rows:
-          type: integer
+            $ref: '#/components/schemas/InstallDetails'
     ApplyBundleRequest:
       type: object
       properties:
@@ -352,6 +325,33 @@ components:
         startTime:
           type: string
           format: date-time
+    AssignmentResult:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+        assigned:
+          type: boolean
+    EsimList:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Esim'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    UpdateEsimRequest:
+      type: object
+      properties:
+        iccid:
+          type: string
+        customerRef:
+          type: string
     InstallDetails:
       type: object
       properties:
