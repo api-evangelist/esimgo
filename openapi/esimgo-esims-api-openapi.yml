@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: eSIM Go E SI Ms API
+  title: eSIM Go E SIMs API
   description: REST API for the eSIM Go connectivity and travel-data platform. Resellers and brands use it to browse the data-bundle catalogue, place and track orders, assign bundles to eSIMs, retrieve install/QR provisioning details, manage inventory, look up network coverage, and receive usage callbacks. Authentication is via the X-API-Key header.
   termsOfService: https://www.esim-go.com
   contact:
@@ -305,35 +305,13 @@ components:
         assignedDate:
           type: string
           format: date-time
-    InstallDetailsResponse:
+    UpdateEsimRequest:
       type: object
       properties:
-        esims:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallDetails'
-    ApplyBundleRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Bundle name to apply.
         iccid:
           type: string
-        allowReassign:
-          type: boolean
-        startTime:
+        customerRef:
           type: string
-          format: date-time
-    AssignmentResult:
-      type: object
-      properties:
-        esims:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallDetails'
-        assigned:
-          type: boolean
     EsimList:
       type: object
       properties:
@@ -345,13 +323,15 @@ components:
           type: integer
         rows:
           type: integer
-    UpdateEsimRequest:
+    AssignmentResult:
       type: object
       properties:
-        iccid:
-          type: string
-        customerRef:
-          type: string
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+        assigned:
+          type: boolean
     InstallDetails:
       type: object
       properties:
@@ -376,6 +356,26 @@ components:
         puk:
           type: string
         firstInstalledDateTime:
+          type: string
+          format: date-time
+    InstallDetailsResponse:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
+    ApplyBundleRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Bundle name to apply.
+        iccid:
+          type: string
+        allowReassign:
+          type: boolean
+        startTime:
           type: string
           format: date-time
   securitySchemes:

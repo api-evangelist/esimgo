@@ -96,6 +96,26 @@ paths:
                 $ref: '#/components/schemas/Bundle'
 components:
   schemas:
+    CatalogueResponse:
+      type: object
+      properties:
+        bundles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bundle'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+        iso:
+          type: string
     Bundle:
       type: object
       properties:
@@ -136,26 +156,6 @@ components:
         billingType:
           type: string
           example: FixedCost
-    Country:
-      type: object
-      properties:
-        name:
-          type: string
-        region:
-          type: string
-        iso:
-          type: string
-    CatalogueResponse:
-      type: object
-      properties:
-        bundles:
-          type: array
-          items:
-            $ref: '#/components/schemas/Bundle'
-        pageCount:
-          type: integer
-        rows:
-          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -79,79 +79,6 @@ paths:
                 $ref: '#/components/schemas/OrderResponse'
 components:
   schemas:
-    OrderLine:
-      type: object
-      properties:
-        type:
-          type: string
-        item:
-          type: string
-        quantity:
-          type: integer
-        subTotal:
-          type: number
-        pricePerUnit:
-          type: number
-        esims:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallDetails'
-    OrderResponse:
-      type: object
-      properties:
-        order:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderLine'
-        total:
-          type: number
-        currency:
-          type: string
-        valid:
-          type: boolean
-        createdDate:
-          type: string
-          format: date-time
-        assigned:
-          type: boolean
-        status:
-          type: string
-        statusMessage:
-          type: string
-        orderReference:
-          type: string
-        runningBalance:
-          type: number
-    OrderItem:
-      type: object
-      properties:
-        type:
-          type: string
-          example: bundle
-        quantity:
-          type: integer
-        item:
-          type: string
-          description: Bundle name/identifier.
-        iccids:
-          type: array
-          items:
-            type: string
-        allowReassign:
-          type: boolean
-        profileID:
-          type: string
-    OrderList:
-      type: object
-      properties:
-        orders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderResponse'
-        pageCount:
-          type: integer
-        rows:
-          type: integer
     CreateOrderRequest:
       type: object
       required:
@@ -171,6 +98,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderItem'
+    OrderList:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
     InstallDetails:
       type: object
       properties:
@@ -197,6 +135,68 @@ components:
         firstInstalledDateTime:
           type: string
           format: date-time
+    OrderItem:
+      type: object
+      properties:
+        type:
+          type: string
+          example: bundle
+        quantity:
+          type: integer
+        item:
+          type: string
+          description: Bundle name/identifier.
+        iccids:
+          type: array
+          items:
+            type: string
+        allowReassign:
+          type: boolean
+        profileID:
+          type: string
+    OrderResponse:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLine'
+        total:
+          type: number
+        currency:
+          type: string
+        valid:
+          type: boolean
+        createdDate:
+          type: string
+          format: date-time
+        assigned:
+          type: boolean
+        status:
+          type: string
+        statusMessage:
+          type: string
+        orderReference:
+          type: string
+        runningBalance:
+          type: number
+    OrderLine:
+      type: object
+      properties:
+        type:
+          type: string
+        item:
+          type: string
+        quantity:
+          type: integer
+        subTotal:
+          type: number
+        pricePerUnit:
+          type: number
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
