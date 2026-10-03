@@ -96,6 +96,15 @@ paths:
                 $ref: '#/components/schemas/Bundle'
 components:
   schemas:
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+        region:
+          type: string
+        iso:
+          type: string
     CatalogueResponse:
       type: object
       properties:
@@ -107,15 +116,6 @@ components:
           type: integer
         rows:
           type: integer
-    Country:
-      type: object
-      properties:
-        name:
-          type: string
-        region:
-          type: string
-        iso:
-          type: string
     Bundle:
       type: object
       properties:

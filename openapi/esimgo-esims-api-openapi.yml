@@ -284,6 +284,31 @@ paths:
                     type: boolean
 components:
   schemas:
+    UpdateEsimRequest:
+      type: object
+      properties:
+        iccid:
+          type: string
+        customerRef:
+          type: string
+    EsimList:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/Esim'
+        pageCount:
+          type: integer
+        rows:
+          type: integer
+    InstallDetailsResponse:
+      type: object
+      properties:
+        esims:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstallDetails'
     Esim:
       type: object
       properties:
@@ -305,24 +330,19 @@ components:
         assignedDate:
           type: string
           format: date-time
-    UpdateEsimRequest:
+    ApplyBundleRequest:
       type: object
       properties:
+        name:
+          type: string
+          description: Bundle name to apply.
         iccid:
           type: string
-        customerRef:
+        allowReassign:
+          type: boolean
+        startTime:
           type: string
-    EsimList:
-      type: object
-      properties:
-        esims:
-          type: array
-          items:
-            $ref: '#/components/schemas/Esim'
-        pageCount:
-          type: integer
-        rows:
-          type: integer
+          format: date-time
     AssignmentResult:
       type: object
       properties:
@@ -356,26 +376,6 @@ components:
         puk:
           type: string
         firstInstalledDateTime:
-          type: string
-          format: date-time
-    InstallDetailsResponse:
-      type: object
-      properties:
-        esims:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstallDetails'
-    ApplyBundleRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Bundle name to apply.
-        iccid:
-          type: string
-        allowReassign:
-          type: boolean
-        startTime:
           type: string
           format: date-time
   securitySchemes:
